@@ -5,7 +5,58 @@
         <title>sunny the math cat</title>
         <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&display=swap" ref="stylesheet">
         <style>
-            
+            body {
+                font-family: 'Quicksand', sans-serif;
+                margin: 0;
+                padding: 0;
+                background-color: #ffd6ec;
+            }
+
+            #wrapper {
+                position: relative;
+                max-width: 480px;
+                margin: 30px auto;
+                overflow: hiddn;
+                background-color: #ffd6ec;
+                padding: 4px;
+            }
+
         </style>
     </head>
+    <body>
+        <div id="wrapper">
+
+
+            <div id="card">
+                <h1>Sunny the Math Cat</h1>
+                <p id="subtitle">a math loving cat :3</p>
+
+                <div id="topbar">
+                    <span>Coins: <span id="coinsdisplay">20</span></span>
+                    <span>Math Level: <span id="leveldisplay">1</span>
+                </div>
+
+                <div id="catface">(^_^)</div>
+
+                <div class="box">
+                    <div class="statlabel">Happiness: <span id="happinesssum">72</span></div>
+                    <div class="barback">
+                        <div class="barfill" id="happinessbar" style="background-color: #f2a6d6; width: 72%"></div>
+                    </div>
+                </div>
+
+                <div class="statlabel">Hunger: <span id="hungernum">60</span></div>
+                <div class="barback">
+                    <div class="barfill" id="hungerbar" style="background-color: #f2c46a; width: 60%;"></div>
+                </div>
+
+                <div class="statlabel">Friendship</div>
+                <div id="heartrow">&#9825;&#9825;&#9825;&#9825;&#9825;</div>
+            </div>
+
+            <div id="hungerpopup">
+                
+            </div>
+        </div>
+    </body>
 </html>
