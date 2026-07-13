@@ -58,6 +58,66 @@
                 padding: 8px;
                 margin-bottom: 12px;
             }
+            #topbar span {
+                font-weight: 600;
+                color: #b0468e;
+            }
+
+            #catface {
+                border: 3px solid #e8a8d0;
+                background-color: #ffffff;
+                padding: 20px;
+                text-align: center;
+                margin-bottom: 12px;
+                font-size: 60px;
+                letter-spacing: 2px;
+            }
+
+            .statlabel {
+                font-size: 14px;
+                color: #b0468e;
+                margin-bottom: 4px;
+                margin-top: 10px;
+            }
+
+            .barback {
+                border: 2px solid #d982bb;
+                height: 16px;
+                width: 100%;
+                background-color: #fbe4f2;
+            }
+
+            .barfill {
+                height: 100%;
+            }
+
+            #heartrow {
+                font-size: 22px;
+                letter-spacing: 3px;
+            }
+
+            #hungerpopup {
+                border: 4px solid #a83f3f;
+                background-color: #fff0f0;
+                padding: 16px;
+                text-align: center;
+                margin-bottom: 12px;
+                display: none;
+            }
+            #hungerpopup .face{
+                font-size: 48px;
+            }
+            #hungerpopup p {
+                color: #a83f3f;
+                font-weight: 600;
+                margin: 8px 0;
+            }
+
+            button {
+                font-family: 'Quicksand', sans-serif;
+                cursor: pointer;
+                border: 3px solid #b0468e;
+            }
         </style>
     </head>
     <body>
@@ -92,8 +152,49 @@
             </div>
 
             <div id="hungerpopup">
-                
+                <div class="face">(x_x)</div>
+                <p>your cat is starving!! feed it NOW</p>
+                <button id="popupfeedbtn">Feed (5 coins)</button>
+            </div>
+
+            <div id="actionrow">
+                <button id="feedbtn">Feed<br>-5 coins</button>
+                <button id="playbtn">Play<br>free</button>
+            </div>
+
+            <div class="box">
+                <div id="shoptitle">Shop</div>
+
+                <div class="shoplabel">Decorations</div>
+                <div class="shoprow" style="margin-bottom: 12px">
+                    <button class="decobtn" id="flowerbtn">&#127801;<br><span>10 coins</span></button>
+                    <button class="decobtn" id="rainbowbtn">&#127752;<br><span>15 coins</span></button>
+                    <button class="decobtn" id="starbtn">&#11088;<br><span>8 coins</span></button>
+                </div>
+
+                <div id="roomrow">no decorations yet</div>
+                <div class="shoplabel">Wallpaper</div>
+
+                <div class="shoprow">
+                    <button class="wallbtn" id="pinkbtn" style="background-color: #ffd6ec;">Pink<br><span id="pinklabel">Equipped</span></button>
+                    <button class="wallbtn" id="lavenderbtn" style="background-color: #ded2f7">Lavender<br><span id="lavenderlabel">25 coins</span></button>
+                    <button class="wallbtn" id="mintbtn" style="background-color:#cdf2df;">Mint<br><span id="mintlabel">25 coins</span></button>
+                </div>
+            </div>
+
+            <div id="mathbox">
+                <div id="mathtitle">Math Time!</div>
+                <div id="problemtext">1 + 1 = ?</div>
+                <div id="answerrow">
+                    <input type="number" id="answerinput">
+                    <button id="submitbtn">Submit</button>
+                </div>
+                <div id="feedback">answer the problem to earn coins!</div>
             </div>
         </div>
+
+        <script>
+            
+        </script>
     </body>
 </html>
