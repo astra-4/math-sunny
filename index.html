@@ -314,6 +314,40 @@
                 lavender: { bg: "#e4d6ff", border: "#a882d9", icon: "&#127820;"},
                 mint: {bg: "d2f7e6", border: "#7fc9a3", icon: "&#127811;"}
             };
+
+            var saved = localStorage.getItem("mathCatState");
+            if (saved) {
+                var parsed = JSON.parse(saved);
+                happiness = parsed.happiness;
+                hunger = parsed.hunger;
+                friendship = parsed.friendship;
+                coins = parsed.coins;
+                mathLevel = parsed.mathLevel;
+                room = parsed.room;
+                wallpaper = parsed.wallpaper;
+                ownedWallpapers = parsed.ownedWallpapers;
+            }
+
+            function saveState() {
+                var stateObj = {
+                    happiness: happiness,
+                    hunger: hunger;
+                    friendship: friendship,
+                    coins: coins,
+                    mathLevel: mathLevel,
+                    room: room;
+                    wallpaper: wallpaper;
+                    ownedWallpapers: ownedWallpapers;
+                };
+                localStorage.setItem("mathCatState", JSON,stringify(stateObj));
+            }
+
+            function makeProblem(level) {
+                var a, b, op, answer, text;
+                if (level < 4) {
+                    a = Math.floor(Math.random() * 10) + 1;
+                }
+            }
         </script>
     </body>
 </html>
