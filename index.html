@@ -331,13 +331,13 @@
             function saveState() {
                 var stateObj = {
                     happiness: happiness,
-                    hunger: hunger;
+                    hunger: hunger,
                     friendship: friendship,
                     coins: coins,
                     mathLevel: mathLevel,
-                    room: room;
-                    wallpaper: wallpaper;
-                    ownedWallpapers: ownedWallpapers;
+                    room: room,
+                    wallpaper: wallpaper,
+                    ownedWallpapers: ownedWallpapers
                 };
                 localStorage.setItem("mathCatState", JSON,stringify(stateObj));
             }
@@ -346,7 +346,73 @@
                 var a, b, op, answer, text;
                 if (level < 4) {
                     a = Math.floor(Math.random() * 10) + 1;
+                    b = Math.floor(Math.random() * 10) + 1;
+                    op = Matah.random() < 0.5 ? "+" : "-";
+                    if (op === "-" && b > a) {
+                        var t = a;
+                        a = b;
+                        b = t;
+                    }
+                    answer = op === "+" ? a + b : a - b;
+                    text = a + " " + op + " " + b;
+                } else if (level < 8) {
+                    var ops = ["+", "-", "x"];
+                    op = ops[Math.floor(Math.random() * ops.length)];
+                    if (op === "x") {
+                        a = Math.floor(Math.random() * 10) + 2;
+                        b = Math.floor(Math.random() * 10) + 2;
+                        answer = a * b;
+                        text = a + " x " + b;
+                    } else {
+                        a = Math.floor(Math.random() * 40) + 5;
+                        b = Math.floor(Math.random() * 40) + 5;
+                        if (op === "-" && b > a) {
+                            var t2 = a;
+                            a = b;
+                            b = t2;
+                        }
+                        answer = op === "+" ? a + b : a - b;
+                        text = a + " " + op + " " + b;
+                    }
+                } else {
+                    var ops2 = ["x", "/"];
+                    op = ops2[Math.floor(Math.random() * ops2.length)];
+                    if (op === "x") {
+                        a = Math.floor(Math.random() * 12) + 2;
+                        b = Math.floor(Math.random() * 12) + 2;
+                        answer = a * b;
+                        text = a + " x " + b;
+                    } else {
+                        b = Math.floor(Math.random() * 10) + 2;
+                        answer = Math.floor(Math.random() * 12) + 1;
+                        a = b * answer;
+                        text = a + " / " + b;
+                    }
                 }
+                currentAnswer = answer;
+                document.getElementById("problemtext").innerHTML = text + " = ?";
+            }
+
+            function repeatEmoji(emoji, count) {
+                var result = "";
+                var i;
+                for (i = 0; i < count; i++) {
+                    result = result + emoji + " ";
+                }
+                return result;
+            }
+
+            function updateDislay() {
+                document.getElementById("coinsdisplay").innerHTML = coins;
+                document.getElementById("leveldisplay").innerHTML = mathLevel;
+
+                document.getElementById("happinessnum").innerHTML = happiness;
+                document.getElementById("happinessbar").style.width = happiness + "%";
+
+                document.getElementById("hungernum").innerHTML = hunger;
+                document.getElementById("hungerbar").style.width = hunger + "%";
+
+                var face = "(^_^)";
             }
         </script>
     </body>
