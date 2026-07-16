@@ -413,7 +413,46 @@
                 document.getElementById("hungerbar").style.width = hunger + "%";
 
                 var face = "(^_^)";
+                if (happiness >= 85)  {
+                    face = "(^\u25BD^)";
+                } else if (happiness >= 65) {
+                    face = "(^\u203F^)";
+                } else if (happiness >= 40) {
+                    face = "(\u30FB_\u30FB)";
+                } else if (happiness >= 20) {
+                    face = "(\uFE36\uFE39\uFE36)";
+                } else {
+                    face = "(\uFF1B\u4E00_\u4E00)";
+                }
+                document.getElementById("catface").innerHTML = face;
+
+                var heartcount = Math.round(friendship / 20);
+                var heartsHtml = "";
+                var i;
+                for (i = 0; i < 5; i ++) {
+                    if (i < heartCount) {
+                        heartsHtml = heartsHtml + "&#9829;";
+                    } else {
+                        heartsHtml = heartsHtml + "&#9825;";
+                    }
+                }
+                document.getElementById("heartrow").innerHTML = heartsHtml;
+
+                if (hunger < 20) {
+                    document.getElementById("hungerpopup").style.display = "block";
+                } else {
+                    document.getElementById("hungerpopup").style.display = "none";
+                }
+
+                var roomHtml = "";
             }
+
+
+
+
+
+            makeProblem(mathLevel);
+            updateDisplay();
         </script>
     </body>
 </html>
