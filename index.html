@@ -235,7 +235,7 @@
 
                 <div id="topbar">
                     <span>Coins: <span id="coinsdisplay">20</span></span>
-                    <span>Math Level: <span id="leveldisplay">1</span>
+                    <span>Math Level: <span id="leveldisplay">1</span></span>
                 </div>
 
                 <div id="catface">(^_^)</div>
@@ -245,15 +245,14 @@
                     <div class="barback">
                         <div class="barfill" id="happinessbar" style="background-color: #f2a6d6; width: 72%"></div>
                     </div>
-                </div>
+                    <div class="statlabel">Hunger: <span id="hungernum">60</span></div>
+                    <div class="barback">
+                        <div class="barfill" id="hungerbar" style="background-color: #f2c46a; width: 60%;"></div>
+                    </div>
 
-                <div class="statlabel">Hunger: <span id="hungernum">60</span></div>
-                <div class="barback">
-                    <div class="barfill" id="hungerbar" style="background-color: #f2c46a; width: 60%;"></div>
+                    <div class="statlabel">Friendship</div>
+                    <div id="heartrow">&#9825;&#9825;&#9825;&#9825;&#9825;</div>
                 </div>
-
-                <div class="statlabel">Friendship</div>
-                <div id="heartrow">&#9825;&#9825;&#9825;&#9825;&#9825;</div>
             </div>
 
             <div id="hungerpopup">
@@ -406,7 +405,7 @@
                 document.getElementById("coinsdisplay").innerHTML = coins;
                 document.getElementById("leveldisplay").innerHTML = mathLevel;
 
-                document.getElementById("happinessnum").innerHTML = happiness;
+                document.getElementById("happinesssum").innerHTML = happiness;
                 document.getElementById("happinessbar").style.width = happiness + "%";
 
                 document.getElementById("hungernum").innerHTML = hunger;
@@ -618,14 +617,14 @@
                 buyWallpaper("pink", 0);
             };
             document.getElementById("lavenderbtn").onclick = function () {
-                buyWallapepr("lavender", 25);
+                buyWallpaper("lavender", 25);
             };
             document.getElementById("mintbtn").onclick = function () {
                 buyWallpaper("mint", 25);
             };
 
             setInterval(function () {
-                happines = happines - 1;
+                happiness = happiness - 1;
                 if (happiness < 0) {
                     happiness = 0;
                 }
