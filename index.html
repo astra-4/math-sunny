@@ -445,11 +445,204 @@
                 }
 
                 var roomHtml = "";
+                if (room.flower > 0) {
+                    roomHtml = roomHtml + repeatEmoji("&#127801;", room.flower);
+                }
+                if (room.rainbow > 0) {
+                    roomHtml = roomHtml + repeatEmoji("&#127752;", room.rainbow);
+                }
+                if (room.star > 0) {
+                    roomHtml = roomHtml + repeatEmoji("&#11088;", room.star);
+                }
+                if (roomHtml === "") {
+                    roomHtml = "no decorations yet";
+                }
+                document.getElementById("roomrow").innerHTML = roomHtml;
+
+                var theme = themes[wallpaper];
+                document.getElementById("wrapper").style.backgroundColor = theme.bg;
+                document.getElementById("card").style.borderColor = theme.border;
+                document.getElementById("themeicon1").innerHtml = theme.icon;
+                document.getElementById("themeicon2").innerHTML = theme.icon;
+                document.getElementById("themeicon3").innerHTML = theme.icon;
+
+                if (wallpaper === "pink") {
+                    document.getElementById("pinklabel").innerHTML = "Equipped";
+                } else if (ownedWallappers.indexOf("pink") !== -1) {
+                    document.getElementById("pinklabel").innerHTML = "Owned";
+                } else {
+                    document.getElementById("pinklabel").innerHTML = "free";
+                }
+
+                if (wallpaper === "lavender") {
+                    document.getElementById("lavenderlabel").innerHTML = "Equipped";
+                } else if (ownedWallappers.indexOf("lavender") !== -1) {
+                    document.getElementById("lavenderlabel").innerHTML = "Owned";
+                } else {
+                    document.getElementById("lavenderlabel").innerHTML = "25 coins";
+                }
+
+                if (wallpaper === "mint") {
+                    document.getElementById("mintlabel").innerHTML = "Equipped";
+                } else if (ownedWallappers.indexOf("mint") !== -1) {
+                    document.getElementById("mintlabel").innerHTML = "Owned";
+                } else {
+                    document.getElementById("mintlabel").innerHTML = "25 coins";
+                }
             }
 
+            function setFeedback(text, color) {
+                document.getElementById("feedback").innerHTML = text;
+                document.getElementById("feedback").style.color = color;
+            }
 
+            function feedCat() {
+                if (coins < 5) {
+                    setFeedback("not enough coins to feed!", "#a83f3f");
+                    return;
+                }
+                coins = coins -5;
+                hunger = hunger + 30;
+                if (hunger > 100) {
+                    hunger = 100;
+                }
+                happiness = happiness + 3;
+                if (happiness > 100) {
+                    happiness = 100;
+                }
+                updateDisplay();
+                saveState();
+            }
 
+            function playCat() {
+                happiness = happiness + 15;
+                if (happiness > 100) {
+                    happiness = 100;
+                }
+                friendship = friendship + 2;
+                if (friendship > 100) {
+                    friendship = 100;
+                }
+                hunger = hunger - 5;
+                if (hunger < 0) {
+                    hunger = 0;
+                }
+                updateDislay();
+                saveState();
+            }
 
+            function buyDeco(name, cost) {
+                if (coins < cost) {
+                    setFeedback("not enough coins for that decoration!", "#a83f3f");
+                    return;
+                }
+                coins = coins - cost;
+                room[name] = room[name] + 1;
+                happiness = happiness + 5;
+                if (happiness > 100) {
+                    happiness = 100;
+                }
+                updateDisplay();
+                saveState();
+            }
+
+            function buyWallpaper(name, cost) {
+                if (ownedWallpapers.indexOf(name) !== -1) {
+                    wallpaper = name;
+                    updateDislay();
+                    saveState();
+                    return;
+                }
+                if (coins < cost) {
+                    setFeedback("not enough coins for that wallpaper!", "#a83f3f");
+                    return;
+                }
+                coins = coins-cost;
+                wallpaper = name;
+                ownedWallpapers.push(name);
+                updateDisplay();
+                saveState();
+            }
+
+            function submitAnswer() {
+                var input = documet.getElementById("answerinput");
+                if (input.value === "") {
+                    return;
+                }
+                var given = parseInt(input.value, 10);
+                var correct = given === currentAnswer;
+
+                if (correct) {
+                    mathLevel = mathLevel + 1;
+                    if (mathLevel > 20) {
+                        mathLevel = 20;
+                    }
+                    var coinGain = 5 + Math.floor(mathLevel / 3);
+                    coins = coins + coinGain;
+                    friendship = friendship + 3;
+                    if (friendship > 100) {
+                        friendship = 100;
+                    }
+                    setFeedback("Correct! + " + coinGain + " coins", "#3f9e50");
+                } else {
+                    mathLevel = mathLevel - 1;
+                    if (mathLevel < 1) {
+                        mathLevel = 1;
+                    }
+                    happiness = happiness - 1;
+                    if (happiness < 0) {
+                        happiness = 0;
+                    }
+                    setFeedback("Not quite, the answer was " + currentAnswer, "#a83f3f");
+                }
+
+                input.value = "";
+                makeProblem(mathLevel);
+                updateDislay();
+                saveState();
+            }
+
+            document.getElementById("feedbtn").onclick = feedCat;
+            document.getElementById("popupfeedbtn").onclick = feedCat;
+            document.getElementById("playbtn").onclick = playCat;
+            document.getElementById("submitbtn").onclick = submitAnswer;
+
+            document.getElementById("flowerbtn").onclick = function () {
+                buyDeco ("flower", 10);
+            };
+            document.getElementById("rainbowbtn").onclick = function () {
+                buyDeco("rainbow", 15);
+            };
+            document.getElementById("starbtn").onclick = function () {
+                buyDeco("star", 8);
+            };
+
+            document.getElementById("pinkbtn").onclick = function () {
+                buyWallpaper("pink", 0);
+            };
+            document.getElementById("lavenderbtn").onclick = function () {
+                buyWallapepr("lavender", 25);
+            };
+            document.getElementById("mintbtn").onclick = function () {
+                buyWallpaper("mint", 25);
+            };
+
+            setInterval(function () {
+                happines = happines - 1;
+                if (happiness < 0) {
+                    happiness = 0;
+                }
+                hunger = hunger - 2;
+                if (hunger < 0) {
+                    hunger = 0;
+                }
+                friendship = friendship - 1;
+                if (friendship < 0) {
+                    friendship = 0;
+                }
+                updateDisplay();
+                saveState();
+            }, 10000);
 
             makeProblem(mathLevel);
             updateDisplay();
