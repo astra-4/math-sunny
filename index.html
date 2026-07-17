@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <title>sunny the math cat</title>
-        <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&display=swap" ref="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet">
         <style>
             body {
                 font-family: 'Quicksand', sans-serif;
@@ -16,14 +16,14 @@
                 position: relative;
                 max-width: 480px;
                 margin: 30px auto;
-                overflow: hiddn;
+                overflow: hidden;
                 background-color: #ffd6ec;
                 padding: 4px;
             }
 
             #card {
                 position: relative;
-                border: 4px slid #d982bb;
+                border: 4px solid #d982bb;
                 background-color: #fff0f8;
                 padding: 16px;
             }
@@ -310,9 +310,9 @@
             var ownedWallpapers = ["pink"];
 
             var themes = {
-                pink: { bg: "#ffd6ec", border: "d982bb", icon: "&#128062;"},
+                pink: { bg: "#ffd6ec", border: "#d982bb", icon: "&#128062;"},
                 lavender: { bg: "#e4d6ff", border: "#a882d9", icon: "&#127820;"},
-                mint: {bg: "d2f7e6", border: "#7fc9a3", icon: "&#127811;"}
+                mint: {bg: "#d2f7e6", border: "#7fc9a3", icon: "&#127811;"}
             };
 
             var saved = localStorage.getItem("mathCatState");
@@ -339,7 +339,7 @@
                     wallpaper: wallpaper,
                     ownedWallpapers: ownedWallpapers
                 };
-                localStorage.setItem("mathCatState", JSON,stringify(stateObj));
+                localStorage.setItem("mathCatState", JSON.stringify(stateObj));
             }
 
             function makeProblem(level) {
@@ -347,7 +347,7 @@
                 if (level < 4) {
                     a = Math.floor(Math.random() * 10) + 1;
                     b = Math.floor(Math.random() * 10) + 1;
-                    op = Matah.random() < 0.5 ? "+" : "-";
+                    op = Math.random() < 0.5 ? "+" : "-";
                     if (op === "-" && b > a) {
                         var t = a;
                         a = b;
@@ -402,7 +402,7 @@
                 return result;
             }
 
-            function updateDislay() {
+            function updateDisplay() {
                 document.getElementById("coinsdisplay").innerHTML = coins;
                 document.getElementById("leveldisplay").innerHTML = mathLevel;
 
@@ -426,7 +426,7 @@
                 }
                 document.getElementById("catface").innerHTML = face;
 
-                var heartcount = Math.round(friendship / 20);
+                var heartCount = Math.round(friendship / 20);
                 var heartsHtml = "";
                 var i;
                 for (i = 0; i < 5; i ++) {
@@ -462,13 +462,10 @@
                 var theme = themes[wallpaper];
                 document.getElementById("wrapper").style.backgroundColor = theme.bg;
                 document.getElementById("card").style.borderColor = theme.border;
-                document.getElementById("themeicon1").innerHTML = theme.icon;
-                document.getElementById("themeicon2").innerHTML = theme.icon;
-                document.getElementById("themeicon3").innerHTML = theme.icon;
 
                 if (wallpaper === "pink") {
                     document.getElementById("pinklabel").innerHTML = "Equipped";
-                } else if (ownedWallappers.indexOf("pink") !== -1) {
+                } else if (ownedWallpapers.indexOf("pink") !== -1) {
                     document.getElementById("pinklabel").innerHTML = "Owned";
                 } else {
                     document.getElementById("pinklabel").innerHTML = "free";
@@ -476,7 +473,7 @@
 
                 if (wallpaper === "lavender") {
                     document.getElementById("lavenderlabel").innerHTML = "Equipped";
-                } else if (ownedWallappers.indexOf("lavender") !== -1) {
+                } else if (ownedWallpapers.indexOf("lavender") !== -1) {
                     document.getElementById("lavenderlabel").innerHTML = "Owned";
                 } else {
                     document.getElementById("lavenderlabel").innerHTML = "25 coins";
@@ -484,7 +481,7 @@
 
                 if (wallpaper === "mint") {
                     document.getElementById("mintlabel").innerHTML = "Equipped";
-                } else if (ownedWallappers.indexOf("mint") !== -1) {
+                } else if (ownedWallpapers.indexOf("mint") !== -1) {
                     document.getElementById("mintlabel").innerHTML = "Owned";
                 } else {
                     document.getElementById("mintlabel").innerHTML = "25 coins";
@@ -527,7 +524,7 @@
                 if (hunger < 0) {
                     hunger = 0;
                 }
-                updateDislay();
+                updateDisplay();
                 saveState();
             }
 
@@ -549,7 +546,7 @@
             function buyWallpaper(name, cost) {
                 if (ownedWallpapers.indexOf(name) !== -1) {
                     wallpaper = name;
-                    updateDislay();
+                    updateDisplay();
                     saveState();
                     return;
                 }
@@ -565,7 +562,7 @@
             }
 
             function submitAnswer() {
-                var input = documet.getElementById("answerinput");
+                var input = document.getElementById("answerinput");
                 if (input.value === "") {
                     return;
                 }
@@ -598,7 +595,7 @@
 
                 input.value = "";
                 makeProblem(mathLevel);
-                updateDislay();
+                updateDisplay();
                 saveState();
             }
 
